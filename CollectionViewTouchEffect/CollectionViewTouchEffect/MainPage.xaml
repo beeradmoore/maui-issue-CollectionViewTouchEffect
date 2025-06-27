@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionViewTouchEffect.MainPage"
+             xmlns:local="clr-namespace:CollectionViewTouchEffect"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="local:MainPageModel"
+             x:Name="RootPage">
+    <Grid RowDefinitions="Auto,*" >
+        <Button Grid.Row="0" Text="Toggle Short/Long List" Command="{Binding ToggleShortLongListCommand}" Margin="12" />
+        
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="None">
+            
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.EmptyViewTemplate>
+                <DataTemplate>
+                    <Label Text="No Items" />
+                </DataTemplate>
+            </CollectionView.EmptyViewTemplate>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Grid x:Name="GridRow" RowDefinitions="Auto,1">
+                        <Grid.Behaviors>
+                            <toolkit:TouchBehavior
+                                PressedOpacity="0.6"
+                                Command="{Binding Source={x:Reference RootPage}, Path=BindingContext.RowClickedCommand, x:DataType='ContentPage'}"
+                                CommandParameter="{Binding Source={x:Reference GridRow}, Path=BindingContext, x:DataType='Grid'}"
+                                />
+                        </Grid.Behaviors>
+                        <Label Grid.Row="0" Text="{Binding .}" Padding="16" />
+                        <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="LightGray" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

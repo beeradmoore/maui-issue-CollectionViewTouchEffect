@@ -25,6 +25,7 @@
                 <DataTemplate x:DataType="x:String">
                     <Grid x:Name="GridRow" RowDefinitions="Auto,1">
                         <Grid.Behaviors>
+                            <local:GridTestBehavior />
                             <toolkit:TouchBehavior
                                 PressedOpacity="0.6"
                                 Command="{Binding Source={x:Reference RootPage}, Path=BindingContext.RowClickedCommand, x:DataType='ContentPage'}"

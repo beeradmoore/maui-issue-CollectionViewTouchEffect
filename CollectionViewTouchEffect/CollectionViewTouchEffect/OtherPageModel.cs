@@ -21,6 +21,7 @@ public partial class OtherPageModel : ObservableObject
     {
         if (_weakPage?.TryGetTarget(out var page) == true)
         {
+            //await page.Navigation.PopAsync();
             await page.Navigation.PopModalAsync();
         }
     }

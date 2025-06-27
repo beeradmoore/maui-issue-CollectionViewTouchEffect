@@ -48,6 +48,7 @@ public partial class MainPageModel : ObservableObject
     {
         if (_weakPage.TryGetTarget(out var page))
         {
+            //page.Navigation.PushAsync(new OtherPage(rowText));
             page.Navigation.PushModalAsync(new OtherPage(rowText));
         }
     }
